@@ -123,10 +123,10 @@ function App() {
           <button style={{ borderRadius: '20px' }}onClick={() => handlePokemonClick(pokemonUnit)} >
 
 
-            <div id="pokemonDataBoxStyle" style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', borderRadius: '20px' }}>
+            <div id="pokemonDataBoxStyle" >
               <img src={pokemonUnit.sprites.front_default} style={{ backgroundColor: 'white', margin: '0px', width: '100px', height: '100px' }} />
               <div key={pokemonUnit.id}>{pokemonUnit.name} #{pokemonUnit.order}</div>
-              <div style={{ margin: '0px', display: 'flex', flexDirection: 'row', width: '50%', alignItems: 'center', justifyContent: 'center' }}>
+              <div   style={{ margin: '0px', display: 'flex', flexDirection: 'row', width: '50%', alignItems: 'center', justifyContent: 'center' }} >
                 <p style={{ margin: '0px' }}>
                   TIPO:
                 </p>
