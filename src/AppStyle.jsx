@@ -20,9 +20,9 @@ export const AppStyleMain = styled.div`
 `
 
 export const AppStyleHeader = styled.div`
-  width:100%;
+  width:80%;
   height:170px;
-   background-color:blue; 
+  background-color:blue; 
   background-image:url(${pokeImage});
   background-repeat:no-repeat;
   display:flex;
@@ -39,9 +39,11 @@ export const AppStyleHeader = styled.div`
    
     input{
       height:90%;
+      width:35%;
     }
     select{
       height:90%;
+      width:35%;
     }
     button{
       height:90%;
@@ -50,6 +52,78 @@ export const AppStyleHeader = styled.div`
     }
   }
 
+  
+  @media (min-width: 1300px){
+    background-color: yellow ;
+    max-width: 1500px; /* Define o tamanho máximo do container */
+    width: 100%; /* Define a largura do container como 100% */
+    margin: 0 auto; 
+    form{
+    /* background-color:yellow; */
+    width:50%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-items:center;
+    height:40px;
+    background-color:red;
+   
+      input{
+        height:90%;
+        width:35%;
+      }
+      select{
+        height:90%;
+        width:35%;
+      }
+      button{
+        height:90%;
+        width:15%;
+        
+      
+      }
+    }
+  }
+  @media (max-width: 1030px){
+    width:100%;
+  }
+  @media (max-width: 738px){
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      background-size:150px;
+      background-position: left bottom;
+
+    form{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-evenly;
+      align-items:center;
+      background-color:red;
+      height:100%;
+/*       margin-left:100px; */
+      input{
+      height:20%;
+      width:70%;
+      }
+      select{
+        height:20%;
+        width:72%;
+      }
+      button{
+        height:20%;
+        
+      
+      }
+    }
+  }
+  @media (max-width: 400px){
+    background-size:100px;
+    height:130px;
+    form{
+      width: 70%;
+    }
+  }
 
 `
 
@@ -76,6 +150,7 @@ export const AppStyleBody = styled.div`
   @media (max-width: 800px){
 
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
   }
   @media (max-width: 600px){
 

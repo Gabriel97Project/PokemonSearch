@@ -8,13 +8,15 @@ import { AppStyleBody, AppStyleHeader, AppStyleMain } from './AppStyle.jsx';
 function App() {
 
   const [pokemonState, setPokemonState] = useState([]);
+  const [allPokemonState, setAllPokemonState] = useState([]);
   const [pokemonData, setPokemonData] = useState([]);
+  const [allPokemonData, setAllPokemonData] = useState([]);
   const [searchPokemon, setSearchPokemon] = useState('');
   const [searchPokemonResults, setSearchPokemonResults] = useState([]);
   const [selectedPokemonType, setSelectedPokemonType] = useState('');
   const [nextUrl, setNextUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=500")
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=600");
   const [modal, setModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState();
 
@@ -28,11 +30,17 @@ function App() {
         setPokemonState(response.data.results);
         setNextUrl(response.data.next);
         setPrevUrl(response.data.previous);
-        console.log(response.data, 'respoooosta')
+     /*    console.log(response.data.results, 'respoooosta') */
       })
       .catch((error) => {
         console.log(error);
       })
+     /* axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1200")
+      .then((response) => {
+        setAllPokemonState(response.data.results);
+      }).catch((error) => {
+        console.log(error);
+      })  */
   }, [url]);
 
   useEffect(() => {
@@ -48,30 +56,59 @@ function App() {
             return null;
           }
         })
-
       )
       setPokemonData(pokemonDataUnit);
-
     }
+
+      
+
+   /*    const fetchUrlAllPokemomData  = async () => {
+        const allPokemonDataUnit = await Promise.all(
+          allPokemonState.map(async (allPokemonStateUnit) => {
+            try {
+              const getAllPokemomResponse = await axios.get(allPokemonStateUnit.url);
+              return getAllPokemomResponse.data;
+            } catch (error) {
+              console.log(`Erro ao obter os dados do Pokémon ${allPokemonStateUnit}:`, error);
+              return null;
+            }
+          })
+
+        )
+        setAllPokemonData(allPokemonDataUnit);
+      }
+    
+    fetchUrlAllPokemomData();  */
     fetchUrlData();
-  }, [pokemonData]);
+  }, [pokemonData/* ,allPokemonData */]);
 
   const handleTypeChange = (event) => {
     setSelectedPokemonType(event.target.value);
   };
-
   const handlePokemonSearchChange = (event) => {
     setSearchPokemon(event.target.value);
   };
   const handleSearch = (event) => {
+
     event.preventDefault();
-    const filteredPokemonData = pokemonData.filter((pokemonFilterUnit) => {
-      const isMatchingType = selectedPokemonType === '' || pokemonFilterUnit.types.some(type => type.type.name === selectedPokemonType);
-      const isMatchingName = pokemonFilterUnit.name.toLowerCase().includes(searchPokemon.toLowerCase());
+
+    let filteredPokemonData = pokemonData.filter((pokemonFilterUnit) => {
+      let isMatchingType =
+        selectedPokemonType === '' ||
+        pokemonFilterUnit.types.some(
+          (type) => type.type.name === selectedPokemonType
+        );
+      let isMatchingName = pokemonFilterUnit.name
+        .toLowerCase()
+        .includes(searchPokemon.toLowerCase());
       return isMatchingType && isMatchingName;
     });
+
     setSearchPokemonResults(filteredPokemonData);
   };
+
+
+  
 
   const handlePokemonClick = (currentPokemon) => {
     setSelectedPokemon(currentPokemon);
@@ -85,6 +122,7 @@ function App() {
 
   useEffect(() => { console.log(pokemonData, 'pokemonData aqui') }, []);
 
+
   return (
     <AppStyleMain>
 
@@ -93,7 +131,8 @@ function App() {
         <form onSubmit={handleSearch}>
           <input type="text" value={searchPokemon} onChange={handlePokemonSearchChange} placeholder="Digite para buscar" />
           <select value={selectedPokemonType} onChange={handleTypeChange}>
-            <option value="">Todos os tipos</option>
+            <option value="">Selecione um tipo</option>
+            <option value="normal">Normal</option>
             <option value="fire">Fogo</option>
             <option value="water">Água</option>
             <option value="grass">Planta</option>
@@ -111,7 +150,6 @@ function App() {
             <option value="fairy">Fada</option>
             <option value="flying">Voador</option>
             <option value="dragon">Dragão</option>
-            <option value="normal">Normal</option>
           </select>
           <button type="submit">Buscar</button>
         </form>
@@ -120,13 +158,13 @@ function App() {
       <AppStyleBody >
 
         {(searchPokemonResults.length > 0 ? searchPokemonResults : pokemonData).map((pokemonUnit) => (
-          <button style={{ borderRadius: '20px' }}onClick={() => handlePokemonClick(pokemonUnit)} >
+          <button style={{ borderRadius: '20px' }} onClick={() => handlePokemonClick(pokemonUnit)} >
 
 
             <div id="pokemonDataBoxStyle" >
               <img src={pokemonUnit.sprites.front_default} style={{ backgroundColor: 'white', margin: '0px', width: '100px', height: '100px' }} />
-              <div key={pokemonUnit.id}>{pokemonUnit.name} #{pokemonUnit.order}</div>
-              <div   style={{ margin: '0px', display: 'flex', flexDirection: 'row', width: '50%', alignItems: 'center', justifyContent: 'center' }} >
+              <div key={pokemonUnit.id}>{pokemonUnit.name} #{pokemonUnit.id}</div>
+              <div style={{ margin: '0px', display: 'flex', flexDirection: 'row', width: '50%', alignItems: 'center', justifyContent: 'center' }} >
                 <p style={{ margin: '0px' }}>
                   TIPO:
                 </p>
@@ -154,18 +192,18 @@ function App() {
         ))}
 
       </AppStyleBody  >
-     {/*  <>
-        {prevUrl && <button onClick={() => {
-          setPokemonData([])
-          setUrl(prevUrl)
-        }}>Previous</button>}
+{/* 
+       {prevUrl && <button onClick={() => {
+        setPokemonData([])
+        setUrl(prevUrl)
+      }}>Previous</button>}
 
-        {nextUrl && <button onClick={() => {
-          setPokemonData([])
-          setUrl(nextUrl)
-        }}>Next</button>}
+      {nextUrl && <button onClick={() => {
+        setPokemonData([])
+        setUrl(nextUrl)
+      }}>Next</button>} */}
 
-      </> */}
+
     </AppStyleMain>
   );
 }
