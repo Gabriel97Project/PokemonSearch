@@ -16,7 +16,7 @@ function App() {
   const [selectedPokemonType, setSelectedPokemonType] = useState('');
   const [nextUrl, setNextUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=600");
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1200");
   const [modal, setModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState();
 
@@ -62,7 +62,7 @@ function App() {
 
       
 
-   /*    const fetchUrlAllPokemomData  = async () => {
+     const fetchUrlAllPokemomData  = async () => {
         const allPokemonDataUnit = await Promise.all(
           allPokemonState.map(async (allPokemonStateUnit) => {
             try {
@@ -78,7 +78,7 @@ function App() {
         setAllPokemonData(allPokemonDataUnit);
       }
     
-    fetchUrlAllPokemomData();  */
+    fetchUrlAllPokemomData();  
     fetchUrlData();
   }, [pokemonData/* ,allPokemonData */]);
 
@@ -121,7 +121,44 @@ function App() {
 
 
   useEffect(() => { console.log(pokemonData, 'pokemonData aqui') }, []);
-
+  if(searchPokemonResults == ''){
+    return(
+      <>
+        {modal && <PokemonModal selectedPokemon={selectedPokemon} closeModal={closeModal} />}
+        <AppStyleHeader>
+          <form onSubmit={handleSearch}>
+            <input type="text" value={searchPokemon} onChange={handlePokemonSearchChange} placeholder="Digite para buscar" />
+            <select value={selectedPokemonType} onChange={handleTypeChange}>
+              <option value="">Selecione um tipo</option>
+              <option value="normal">Normal</option>
+              <option value="fire">Fogo</option>
+              <option value="water">Água</option>
+              <option value="grass">Planta</option>
+              <option value="poison">Veneno</option>
+              <option value="electric">Elétrico</option>
+              <option value="rock">Pedra</option>
+              <option value="ice">Gelo</option>
+              <option value="dark">Sombrio</option>
+              <option value="ghost">Fantasma</option>
+              <option value="psychic">Psíquico</option>
+              <option value="steel">Ferro</option>
+              <option value="ground">terrestre</option>
+              <option value="fighting">Lutador</option>
+              <option value="bug">Inseto</option>
+              <option value="fairy">Fada</option>
+              <option value="flying">Voador</option>
+              <option value="dragon">Dragão</option>
+            </select>
+            <button type="submit">Buscar</button>
+          </form>
+        </AppStyleHeader>
+        <div>
+          pequise seu pokemon ou o tipo dele.
+        </div>
+      </>
+      
+    )
+  }
 
   return (
     <AppStyleMain>
