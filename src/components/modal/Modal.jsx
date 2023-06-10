@@ -10,14 +10,15 @@ export default function PokemonModal({ selectedPokemon, closeModal }) {
 const pokemonTypes = selectedPokemon.types.map((type) => type.type.name);
   return (
     <ModalStyled>
-      <button onClick={closeModal}>X</button>
       <ModalSonStyled>
+      <button onClick={closeModal}>X</button>
         <PokemonCard pokemonTypes={pokemonTypes} >
           <img src={selectedPokemon.sprites.front_default} alt="pokemon" />
           <p>Nome: {selectedPokemon.name}</p>
         </PokemonCard>
         <div id="modalPokemonStats">
-          <p>Atributos:</p>
+        
+          <p>ATRIBUTOS</p>
           <ul>
             {selectedPokemon.stats.map((statUnit) => (
               <li key={statUnit.stat.name}>
