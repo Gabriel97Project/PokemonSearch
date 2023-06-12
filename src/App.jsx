@@ -2,8 +2,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PokemonModal from './components/modal/Modal';
-import { AppStyleBody, AppStyleHeader, AppStyleMain } from './AppStyle.jsx';
-
+import { AppStyleBody, AppStyleHeader, AppStyleMain, SearchPokemonTextStyle } from './AppStyle.jsx';
+import searchIcon from "../src/assets/lupapng.png"
 
 function App() {
 
@@ -15,6 +15,8 @@ function App() {
   const [url] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1280");
   const [modal, setModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState();
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
 
   useEffect(() => {
     axios.get(url)
@@ -46,7 +48,10 @@ function App() {
   }, [pokemonState]);
 
   const handleTypeChange = (event) => {
+
     setSelectedPokemonType(event.target.value);
+
+
   };
 
   const handlePokemonSearchChange = (event) => {
@@ -58,13 +63,21 @@ function App() {
 
     event.preventDefault();
     let filteredPokemonData = pokemonData.filter((pokemonFilterUnit) => {
-      let isMatchingType = selectedPokemonType === '' || pokemonFilterUnit.types.some(
+      let isMatchingType = selectedPokemonType === "" || pokemonFilterUnit.types.some(
         (type) => type.type.name === selectedPokemonType
       );
       let isMatchingName = pokemonFilterUnit.name.toLowerCase().includes(searchPokemon.toLowerCase());
       return isMatchingType && isMatchingName;
     });
-    setSearchPokemonResults(filteredPokemonData);
+    if (selectedPokemonType !== "" || searchPokemon !== "") {
+      setSearchPokemonResults(filteredPokemonData);
+      setSearchPerformed(true);
+
+    } else {
+      setSearchPokemonResults([]);
+    }
+
+
   };
 
   const handlePokemonClick = (currentPokemon) => {
@@ -126,10 +139,23 @@ function App() {
           ))
         ) : (
           <div>
-            {searchPokemon !== '' && selectedPokemonType !== '' ? (
-              <p>Nenhum Pokémon encontrado com o tipo e nome informados.</p>
+            {searchPerformed && searchPokemonResults.length >= 0 ? (
+              <SearchPokemonTextStyle>
+                <div className="noPokemonFoundDiv">
+                  <h2 className="noPokemonFoundText">
+                    Nenhum Pokémon encontrado com o tipo e nome informados.
+                  </h2>
+                </div>
+              </SearchPokemonTextStyle>
             ) : (
-              <p>Selecione um tipo de Pokémon e digite um nome para fazer a busca.</p>
+              <SearchPokemonTextStyle>
+                <div className="noPokemonFoundDiv">
+                  <h2 className="noPokemonFoundText">
+                    Selecione um tipo de Pokémon ou digite um nome para fazer a busca.
+                  </h2>
+                  <img src={searchIcon} alt="Icone de pesquisa" />
+                </div>
+              </SearchPokemonTextStyle>
             )}
           </div>
         )}

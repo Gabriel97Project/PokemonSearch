@@ -10,14 +10,16 @@ export const AppStyleMain = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background: linear-gradient(to left, orange,  orange, red, #401000);
+  background: linear-gradient(to left, orange,  orange, red);
+ 
 `
 export const AppStyleHeader = styled.div`
 
-  width:80%;
+  width:100%;
   height:170px;
   background-image:url(${pokeImage});
   background-repeat:no-repeat;
+  background-color:#750202;
   display:flex;
   align-items:center;
   justify-content:Center;
@@ -81,13 +83,14 @@ export const AppStyleHeader = styled.div`
       justify-content:space-evenly;
       align-items:center;
       height:100%;
+      padding-left:10%;
       input{
         height:20%;
-        width:70%;
+        width:80%;
       }
       select{
         height:20%;
-        width:72%;
+        width:82%;
       }
       button{
         height:20%;
@@ -175,3 +178,46 @@ export const AppStyleBody = styled.div`
 `
 
 
+export const SearchPokemonTextStyle = styled.div`
+  width: 100%;
+  background: linear-gradient(to left, orange,  orange, red);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  right:0px;
+  overflow:hidden;
+  .noPokemonFoundDiv{
+    width:60%;
+    height:35%;
+    margin-bottom:250px;
+    border : solid 5px;
+    border-color:black;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    border-radius:2%;
+    background: linear-gradient(to right, orange,  orange, red);
+    .noPokemonFoundText{
+      font-size:30px;
+    }
+    img{
+      width:80px;
+      height:80px;
+    }
+  }
+  @media (max-width: 600px){
+    .noPokemonFoundDiv{
+      .noPokemonFoundText{
+        font-size:25px;
+      }
+    }
+    
+  }
+ 
+
+
+`
