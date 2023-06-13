@@ -75,6 +75,7 @@ function App() {
 
     } else {
       setSearchPokemonResults([]);
+      
     }
 
 
@@ -124,7 +125,7 @@ function App() {
           searchPokemonResults.map((pokemonUnit) => (
             <button key={pokemonUnit.index} onClick={() => handlePokemonClick(pokemonUnit)}>
               <div id="pokemonDataBoxStyle" key={pokemonUnit.index}>
-                <img src={pokemonUnit.sprites.front_default} alt={pokemonUnit.name} />
+                <img src={pokemonUnit.sprites?.front_default} alt={pokemonUnit.name} />
                 <div>{pokemonUnit.name} #{pokemonUnit.id}</div>
                 <div id="typeDiv">
                   <p>TIPO:</p>
