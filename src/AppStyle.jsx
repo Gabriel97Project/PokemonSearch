@@ -10,7 +10,7 @@ export const AppStyleMain = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background-color:#f7b881;
+  background-color:#ffe7b0;
   
 `
 export const AppStyleHeader = styled.div`
@@ -19,7 +19,7 @@ export const AppStyleHeader = styled.div`
   height:170px;
   background-image:url(${pokeImage});
   background-repeat:no-repeat;
-  background-color:orange;
+  background-color:#d109;
   display:flex;
   align-items:center;
   justify-content:Center;
@@ -118,7 +118,7 @@ export const AppStyleBody = styled.div`
   button{
     background-color:transparent;
     border-color:transparent;
-    cursor: pointer;   
+    cursor:pointer;   
   }
   #pokemonDataBoxStyle{
     height:180px;
@@ -187,31 +187,33 @@ export const SearchPokemonTextStyle = styled.div`
   align-items:center;
   justify-content:center;
   position:absolute;
-  right:0px;
-  overflow:hidden;
-  background-color:#f7b881;
   .noPokemonFoundDiv{
-  /*   width:80%; */
+     width:80%; 
+
     height:35%;
     margin-bottom:250px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:30px;
-    border-radius:2%;
-    background-color:#f7b881;
-      font-size:30px;
+    text-align:center;
+
+      font-size:25px;
     }
     img{
       width:80px;
       height:80px;
     }
+
+    #notFoundImage{
+      width:100px;
+      height:100px;
+    }
   
   @media (max-width: 600px){
     .noPokemonFoundDiv{
       .noPokemonFoundText{
-        font-size:25px;
+        font-size:20px;
       }
     }
     

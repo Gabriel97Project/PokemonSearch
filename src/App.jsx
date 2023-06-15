@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import PokemonModal from './components/modal/Modal';
 import { AppStyleBody, AppStyleHeader, AppStyleMain, SearchPokemonTextStyle } from './AppStyle.jsx';
 import searchIcon from "../src/assets/lupapng.png"
+import psyduckImage from "./assets/psyducktransparent.webp"
 
 function App() {
 
@@ -146,6 +147,7 @@ function App() {
                   <h2 className="noPokemonFoundText">
                     Nenhum Pokémon encontrado com o tipo e nome informados.
                   </h2>
+                  <img id="notFoundImage" src={psyduckImage} alt="psyduck not found"/>
                 </div>
               </SearchPokemonTextStyle>
             ) : (
