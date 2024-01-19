@@ -68,9 +68,7 @@ export const AppStyleHeader = styled.div`
         }
     }
   }
-  @media (max-width: 1030px){
-    width:100%;
-  }
+
   @media (max-width: 738px){
       display:flex;
       justify-content:flex-end;
@@ -98,8 +96,11 @@ export const AppStyleHeader = styled.div`
     }
   }
   @media (max-width: 400px){
+
     background-size:150px;
     height:200px;
+    width:100%;
+    background-color:green;
     form{
       width: 70%;
     }
@@ -171,7 +172,7 @@ export const AppStyleBody = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 400px){
-    width:90%;
+    /* width:90%; */
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }
@@ -209,6 +210,11 @@ export const SearchPokemonTextStyle = styled.div`
       width:100px;
       height:100px;
     }
+  
+  @media (min-width: 1300px){
+    max-width: 1500px;
+    }
+    
   
   @media (max-width: 600px){
     .noPokemonFoundDiv{

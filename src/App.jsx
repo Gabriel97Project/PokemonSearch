@@ -70,6 +70,10 @@ function App() {
       let isMatchingName = pokemonFilterUnit.name.toLowerCase().includes(searchPokemon.toLowerCase());
       return isMatchingType && isMatchingName;
     });
+
+
+    
+    console.log('filteredPokemonData:', filteredPokemonData);
     if (selectedPokemonType !== "" || searchPokemon !== "") {
       setSearchPokemonResults(filteredPokemonData);
       setSearchPerformed(true);
@@ -122,12 +126,12 @@ function App() {
         </form>
       </AppStyleHeader>
       <AppStyleBody >
-        {searchPokemonResults.length > 0 ? (
+        {searchPokemonResults.length > 0  ? (
           searchPokemonResults.map((pokemonUnit) => (
             <button key={pokemonUnit.index} onClick={() => handlePokemonClick(pokemonUnit)}>
               <div id="pokemonDataBoxStyle" key={pokemonUnit.index}>
                 <img src={pokemonUnit.sprites?.front_default} alt={pokemonUnit.name} />
-                <div>{pokemonUnit.name} #{pokemonUnit.id}</div>
+                {/* <div>{pokemonUnit.name} #{pokemonUnit.id}</div> */}
                 <div id="typeDiv">
                   <p>TIPO:</p>
                   {pokemonUnit.types.map((typeUnit) => (
@@ -154,7 +158,7 @@ function App() {
               <SearchPokemonTextStyle>
                 <div className="noPokemonFoundDiv">
                   <h2 className="noPokemonFoundText">
-                    Selecione um tipo de Pokémon ou digite um nome para fazer a busca.
+                    Seleeeecione um tipo de Pokémon ou digite um nome para fazer a busca.
                   </h2>
                   <img src={searchIcon} alt="Icone de pesquisa" />
                 </div>
